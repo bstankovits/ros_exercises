@@ -3,7 +3,7 @@
 import rospy
 from sensor_msgs.msg import LaserScan
 import random
-import math 
+from numpy import pi 
 
 def talker():
     pub = rospy.Publisher(rospy.get_param('fake_scan/pub_topic', '/fake_scan'), LaserScan, queue_size = 20)
@@ -14,9 +14,9 @@ def talker():
         scan = LaserScan()
         scan.header.stamp = rospy.Time.now() 
         scan.header.frame_id = 'base_link'
-        scan.angle_min = eval(rospy.get_param('fake_scan/angle_min', '(-2.0/3.0)*math.pi'))
-        scan.angle_max = eval(rospy.get_param('fake_scan/angle_max', '(2.0/3.0)*math.pi'))
-        scan.angle_increment = eval(rospy.get_param('fake_scan/angle_increment', '(1.0/300.0)*math.pi'))
+        scan.angle_min = eval(rospy.get_param('fake_scan/angle_min', '(-2.0/3.0)*pi'))
+        scan.angle_max = eval(rospy.get_param('fake_scan/angle_max', '(2.0/3.0)*pi'))
+        scan.angle_increment = eval(rospy.get_param('fake_scan/angle_increment', '(1.0/300.0)*pi'))
         scan.scan_time = 1.0/rospy.get_param('fake_scan/pub_rate', 20)
         scan.range_min = rospy.get_param('fake_scan/range_min', 1.0)
         scan.range_max = rospy.get_param('fake_scan/range_max', 10.0)
